@@ -1,0 +1,59 @@
+/* Titles */
+
+h1{
+  font-weight: 900;
+  font-size: $lg;
+  margin: $lg;
+
+  @include lg{
+    font-size: $xl;
+    margin: $xl;
+  }
+}
+h2{
+  font-weight: 700;
+  font-size: $md;
+  margin: $sm;
+}
+
+/* Buttons */
+.btn{
+  border: none;
+  font-weight: 900;
+  padding: $sm $md;
+
+  &.btn-primary{
+    background-color: $primary-blue;
+    color: $white;
+    transition: $base-transition;
+
+    &:hover{
+      background-color: $secondary-blue;
+      transition: $base-transition;
+    }
+
+    &:active{
+      background-color: $primary-blue;
+    }
+
+    &:disabled{
+      background-color: $black-700;
+      cursor: not-allowed;
+    }
+  }
+}
+
+/* Inputs */
+input:disabled{
+  cursor: not-allowed;
+}
+
+/* Views */
+.view{
+  transform: translateY(80px);
+  min-height: 80vh;
+  background-image: url(../assets/triangle.png);
+  background-size: max(20%, 180px);
+  background-position: right bottom;
+  background-repeat: no-repeat;
+}
