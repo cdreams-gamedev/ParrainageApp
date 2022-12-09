@@ -18,7 +18,7 @@ const Watch = () => {
 
     reader.onload = onReaderLoad;
     reader.readAsText(input.files[0])
-    autoScroll()
+    // autoScroll()
   }
   return ( 
     <>

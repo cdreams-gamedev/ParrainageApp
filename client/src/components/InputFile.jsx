@@ -2,9 +2,12 @@ import { useState } from "react";
 
 const InputFile = ({ name, className, text, setText, onChange, accept }) => {
   const handleChange = (e) => {
+    console.log(e.target.value)
     let fileName = e.target.value.split('\\').pop()
     setText(fileName)
-    onChange(e)
+
+    if (onChange)
+      onChange(e)
   }
 
   return ( 

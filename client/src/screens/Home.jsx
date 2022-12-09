@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Matches from "../components/Matches";
 import FetchMatches from "../api/MatchesAPI";
 import Loader from "../components/Loader";
+import { WriteToCSV } from "../utils/FileFormat";
 
 const Home = () => {
   const [started, setStarted] = useState(false)
@@ -68,32 +69,8 @@ const Home = () => {
 
   // Save to files
 
-  const downloadToFile = (content, filename, contentType) => {
-    const a = document.createElement('a');
-    let file = new Blob([content], { type: contentType });
-
-    // Download the plain json
-    a.href = URL.createObjectURL(file);
-    a.download = `${filename}.json`;
-    a.click();
-    URL.revokeObjectURL(a.href);
-    
-    // Convert to csv
-    const items = JSON.parse(content)
-    const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
-    const header = Object.keys(items[0])
-    const csv = [
-      header.join(','), // header row first
-      ...items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
-    ].join('\r\n')
-    
-    // Download the csv
-    file = new Blob([csv]);
-    a.href = URL.createObjectURL(file)
-    a.download = `${filename}.csv`
-    a.click();
-    URL.revokeObjectURL(a.href);
-
+  const downloadToFile = async (content, filename, contentType) => {
+    await WriteToCSV(content, filename, contentType)
   }
 
   const onDownloadClicked = () => {
@@ -109,7 +86,7 @@ const Home = () => {
           <div className="home">
             <div className="content">
               <img src={logoEndpd} alt="ENSPD" />
-              <h1>Parrainage ENSPD 2022</h1>
+              <h1 className="title">Parrainage ENSPD 2022</h1>
               {!started && <button className="btn btn-primary" onClick={start}>Commencer</button>}
               {started && <InsertFiles proceed={proceed} />}
               {loading && <Loader />}
