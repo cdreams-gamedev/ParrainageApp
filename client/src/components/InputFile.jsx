@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-const InputFile = ({ name }) => {
-  const [text, setText] = useState("Aucun fichier ajouté")
+const InputFile = ({ name, className, text, setText, onChange, accept }) => {
   const handleChange = (e) => {
     let fileName = e.target.value.split('\\').pop()
     setText(fileName)
+    onChange(e)
   }
 
   return ( 
@@ -13,9 +13,10 @@ const InputFile = ({ name }) => {
         className="input" 
         type="file" id={ name } 
         name={ name } 
-        accept=".csv, .xlsx"
+        accept={ accept }
+        required
         onChange={ (e) => handleChange(e) }/>
-      <label className="label-input" htmlFor={ name }>{ text }</label>
+      <label className={`label-input ${className}`} htmlFor={ name }>{ text }</label>
     </>
    );
 }

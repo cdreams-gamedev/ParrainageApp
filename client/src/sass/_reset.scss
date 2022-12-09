@@ -25,6 +25,7 @@ del,
 dfn, 
 em, 
 img, 
+svg,
 ins, 
 kbd, 
 q, 
@@ -133,4 +134,10 @@ table {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+img, svg{
+	width: 100%;
+	max-width: 100%;
+	max-height: 100%;
 }

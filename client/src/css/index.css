@@ -25,6 +25,7 @@ del,
 dfn,
 em,
 img,
+svg,
 ins,
 kbd,
 q,
@@ -133,23 +134,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
+img, svg {
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
 /* Titles */
+* {
+  scroll-behavior: smooth;
+}
+
 h1 {
   font-weight: 900;
   font-size: 1.8rem;
-  margin: 1.8rem;
+  margin: 1.8rem 0;
 }
 @media (min-width: 960px) {
   h1 {
     font-size: 2.3rem;
-    margin: 2.3rem;
+    margin: 2.3rem 0;
   }
 }
 
 h2 {
   font-weight: 700;
   font-size: 1.5rem;
-  margin: 1.2rem;
+  margin: 1.2rem 0;
 }
 
 /* Buttons */
@@ -182,32 +193,57 @@ input:disabled {
 
 /* Views */
 .view {
-  transform: translateY(80px);
-  min-height: 80vh;
+  transform: translateY(50px);
+  min-height: calc(100vh - 50px);
   background-image: url(../assets/triangle.png);
   background-size: max(20%, 180px);
   background-position: right bottom;
   background-repeat: no-repeat;
 }
 
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+@media (min-width: 480px) {
+  .container {
+    padding: 0.7rem;
+  }
+}
+@media (min-width: 720px) {
+  .container {
+    padding: 1.3rem;
+  }
+}
+
+.center {
+  text-align: center;
+}
+
+.bg-parrain {
+  background-color: #f6b00e;
+}
+
+.bg-fileul {
+  background-color: #f6651e;
+}
+
 /* Components */
 #navbar {
   z-index: 500;
   top: 0;
+  height: 50px;
   position: fixed;
-  background-color: #024474;
-  padding: 5px 0;
+  background-color: #fff;
+  padding: 0.5rem 0;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.254);
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.254);
 }
 #navbar img {
-  width: 3rem;
-  padding: 5px;
-  background-color: #fff;
-  border-radius: 50%;
+  height: 48px;
 }
 #navbar .hamburger {
   cursor: pointer;
@@ -226,20 +262,23 @@ input:disabled {
   position: relative;
   width: 100%;
   border-radius: 50px;
-  background-color: #fff;
+  background-color: #024474;
   height: 5px;
   transform: rotate(6px);
   transition: all ease 0.4s;
 }
-#navbar .hamburger span::before {
+#navbar .hamburger span::before, #navbar .hamburger span::after {
   position: absolute;
   content: "";
   border-radius: 50px;
   width: 100%;
   height: 5px;
-  background-color: #fff;
+  background-color: #024474;
   transform: translateY(-12px);
   transition: all ease 0.4s;
+}
+#navbar .hamburger span::after {
+  transform: translateY(12px);
 }
 #navbar .nav-links {
   position: absolute;
@@ -248,7 +287,7 @@ input:disabled {
   overflow: hidden;
   width: 100%;
   text-align: center;
-  background-color: #024474;
+  background-color: #fff;
   top: 100%;
   transition: all ease 0.4s;
 }
@@ -262,7 +301,7 @@ input:disabled {
   }
 }
 #navbar .nav-links li {
-  color: #fff;
+  color: #024474;
   padding: 5px 0;
   transition: all ease 0.4s;
 }
@@ -276,26 +315,30 @@ input:disabled {
 #navbar.active .hamburger span::before {
   transform: rotate(-90deg);
 }
+#navbar.active .hamburger span::after {
+  opacity: 0;
+}
 #navbar.active .nav-links {
   padding: 15px 0;
   max-height: 20rem;
-  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.254);
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.254);
   transition: all ease 0.4s;
 }
 
 .start-part {
   padding: 1.5rem;
 }
-.start-part form {
+.start-part form button {
+  align-self: center;
+}
+
+form {
   display: flex;
   gap: 15px;
   flex-direction: column;
 }
-.start-part form input[type=file] {
+form input[type=file] {
   display: none;
-}
-.start-part form button {
-  align-self: center;
 }
 
 .label-input {
@@ -303,7 +346,6 @@ input:disabled {
   padding: 50px;
   text-align: center;
   border: none;
-  background-color: #f6651e;
   box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.164);
   font-size: 1.2rem;
   color: #fff;
@@ -312,12 +354,45 @@ input:disabled {
   transition: all ease 0.4s;
 }
 .label-input:hover {
-  background-color: #df5e1e;
   transition: all ease 0.4s;
+}
+.label-input.bg-parrain:hover {
+  background-color: #dd9e0b;
+}
+.label-input.bg-fileul:hover {
+  background-color: #df5e1e;
 }
 .label-input.disabled {
   background-color: #fc8347;
   cursor: not-allowed;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loader-wrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2117647059);
+  display: grid;
+  place-items: center;
+}
+
+.loader {
+  border: 16px solid #e3e3e3;
+  border-top: 16px solid #024474;
+  border-radius: 50%;
+  width: 140px;
+  height: 140px;
+  animation: spin 1s linear infinite;
 }
 
 /* Screens */
@@ -327,7 +402,6 @@ input:disabled {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow-y: scroll;
 }
 .home .content {
   display: flex;
@@ -340,4 +414,78 @@ input:disabled {
 .home .content img {
   width: 100px;
   transform: translateX(8px);
+}
+
+.inputs {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+}
+.inputs > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.matches-wrapper {
+  min-height: 90vh;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.matches {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 40px;
+}
+.matches > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.matches > div > * {
+  width: 100%;
+}
+.matches > div img {
+  aspect-ratio: 1;
+  width: 70%;
+  margin: auto;
+}
+.matches > div span {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.navigation {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+.navigation > * {
+  flex: 1;
+}
+
+#download {
+  width: 100%;
+}
+
+/* Responsive */
+@media (min-width: 960px) {
+  .matches {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .matches > * {
+    flex: 1;
+  }
+}
+.watch {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }

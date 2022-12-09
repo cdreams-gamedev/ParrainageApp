@@ -1,18 +1,19 @@
 .start-part{
   padding: $md;
-
   form{
-    display: flex;
-    gap: 15px;
-    flex-direction: column;
-
-    input[type="file"]{
-      display: none;
-    }
-
     button{
       align-self: center;
     }
+  }
+}
+
+form{
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+
+  input[type="file"]{
+    display: none;
   }
 }
 
@@ -21,7 +22,6 @@
   padding: 50px;
   text-align: center;
   border: none;
-  background-color: $primary-orange;
   box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.164);
   // border-radius: 10px;
   font-size: $sm;
@@ -30,9 +30,16 @@
   cursor: pointer;
   transition: $base-transition;
 
-  &:hover{
-    background-color: $secondary-orange;
+  &:hover {
     transition: $base-transition;
+  }
+
+  &.bg-parrain:hover{
+    background-color: $secondary-yellow;
+  }
+
+  &.bg-fileul:hover{
+    background-color: $secondary-orange;
   }
 
   &.disabled{

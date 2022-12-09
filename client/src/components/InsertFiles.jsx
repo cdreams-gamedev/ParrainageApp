@@ -1,23 +1,35 @@
+import { useState } from "react"
 import InputFile from "./InputFile"
 
 const InsertFiles = ({ proceed }) => {
-  const handleLocalProceed = () => {
-    const submitBtn = document.querySelector('form button')
-    submitBtn.disabled = true
-    proceed()
-  }
-
+  const [parrainText, setParrainText] = useState("Aucun fichier ajouté")
+  const [filleulText, setFilleulText] = useState("Aucun fichier ajouté")
+  
   return ( 
     <>
       <div className="start-part">
         <form action="post" onSubmit={e => e.preventDefault()}>
-          <h2>Ajoutez le fichier csv des aines academiques</h2>
-          {/* <input className="input" type="file" name="aines" id="" /> */}
-          <InputFile name="aines"/>
-          <h2>Ajoutez le fichier csv des cadets</h2>
-          <InputFile name="cadets"/>
-          {/* <input className="input" type="file" name="cadets" /> */}
-          <button className="btn btn-primary" onClick={ handleLocalProceed }>Proceder</button>
+          <div className="inputs">
+            <div>
+              <h2>Fichier csv des parrains</h2>
+              <InputFile 
+                name="aines" 
+                className="bg-parrain"
+                text={ parrainText }
+                accept=".csv, .xlsx"
+                setText={ setParrainText }/>
+            </div>
+            <div>
+              <h2>Fichier csv des fileuls</h2>
+              <InputFile 
+                name="cadets" 
+                className="bg-fileul"
+                text={ filleulText }
+                accept=".csv, .xlsx"
+                setText={ setFilleulText }/>
+            </div>
+          </div>
+          <button className="btn btn-primary" onClick={ () => proceed(parrainText, filleulText) }>Attribuer</button>
         </form>
       </div>
     </>

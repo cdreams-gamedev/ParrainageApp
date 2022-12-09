@@ -1,9 +1,10 @@
 #navbar{
   z-index: 500;
   top: 0;
+  height: 50px;
   position: fixed;
-  background-color: $primary-blue;
-  padding: 5px 0;
+  background-color: $white;
+  padding: .5rem 0;
   width: 100%;
   display: flex;
   align-items: center;
@@ -11,10 +12,7 @@
   box-shadow: $base-shadow;
 
   img{
-    width: 3rem;
-    padding: 5px;
-    background-color: #fff;
-    border-radius: 50%;
+    height: 48px;
   }
 
   .hamburger{
@@ -33,21 +31,26 @@
       position: relative;
       width: 100%;
       border-radius: 50px;
-      background-color: $white;
+      background-color: $primary-blue;
       height: 5px;
       transform: rotate(6px);
       transition: $base-transition;
 
-      &::before{
+      &::before, &::after{
         position: absolute;
         content: '';
         border-radius: 50px;
         width: 100%;
         height: 5px;
-        background-color: $white;
+        background-color: $primary-blue;
         transform: translateY(-12px);
         transition: $base-transition;
       }
+
+      &::after{
+        transform: translateY(12px);
+      }
+      
     }
   }
 
@@ -58,7 +61,7 @@
     overflow: hidden;
     width: 100%;
     text-align: center;
-    background-color: $primary-blue;
+    background-color: $white;
     top: 100%;
     transition: $base-transition;
 
@@ -71,7 +74,7 @@
     };
 
     li{
-      color: $white;
+      color: $primary-blue;
       padding: 5px 0;
       transition: $base-transition;
 
@@ -88,6 +91,10 @@
 
       &::before{
         transform: rotate(-90deg);
+      }
+      
+      &::after{
+        opacity: 0;
       }
     }
 
