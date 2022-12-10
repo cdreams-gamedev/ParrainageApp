@@ -75,7 +75,7 @@ const Home = () => {
 
   const onDownloadClicked = () => {
     const data = JSON.stringify(matches)
-    downloadToFile(data, "correspondance_parrainage", "application/json")
+    downloadToFile(data, `Correspondance_Parrainage_${matches[0].parrain.axe}`, "application/json")
   }
 
   return (
@@ -86,7 +86,7 @@ const Home = () => {
           <div className="home">
             <div className="content">
               <img src={logoEndpd} alt="ENSPD" />
-              <h1 className="title">Parrainage ENSPD 2022</h1>
+              <h1 className="title">{started ? "Attribution des parrains" : "Parrainage ENSPD 2022"}</h1>
               {!started && <button className="btn btn-primary" onClick={start}>Commencer</button>}
               {started && <InsertFiles proceed={proceed} />}
               {loading && <Loader />}

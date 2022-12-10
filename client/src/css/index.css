@@ -159,15 +159,22 @@ h1 {
 
 h2 {
   font-weight: 700;
-  font-size: 1.5rem;
   margin: 1.2rem 0;
+  width: 100%;
+  color: #024474;
+  text-align: center;
+  font-size: 2.5rem;
 }
 
 /* Buttons */
 .btn {
   border: none;
+  border-radius: 0.3rem;
   font-weight: 900;
+  font-size: 1.2rem;
+  text-transform: uppercase;
   padding: 1.2rem 1.5rem;
+  margin-top: 1.5rem;
   cursor: pointer;
 }
 .btn.btn-primary {
@@ -176,8 +183,13 @@ h2 {
   transition: all ease 0.4s;
 }
 .btn.btn-primary:hover {
-  background-color: #033558;
   transition: all ease 0.4s;
+  background: url(http://localhost:3000/static/media/triangle.46598ab9f5404ba132e8.png);
+  background-color: #033558;
+  background-repeat: no-repeat;
+  transition: all ease 0.4s;
+  background-size: 1.8rem;
+  background-position: bottom right;
 }
 .btn.btn-primary:active {
   background-color: #024474;
@@ -200,6 +212,33 @@ input:disabled {
   background-size: max(20%, 180px);
   background-position: right bottom;
   background-repeat: no-repeat;
+}
+
+/* Parrain - Filleul */
+.filleul-surligner,
+.parrain-surligner {
+  padding: 0 0.5rem;
+  color: #fff;
+}
+
+.filleul-surligner {
+  background-color: #f6651e;
+}
+
+.parrain-surligner {
+  background-color: #f6b00e;
+}
+
+.filleul h1 {
+  color: #f6651e;
+  font-size: 2.5rem;
+  width: 100%;
+}
+
+.parrain h1 {
+  color: #f6b00e;
+  font-size: 2.5rem;
+  width: 100%;
 }
 
 .container {
@@ -328,6 +367,7 @@ input:disabled {
 
 .start-part {
   padding: 1.5rem;
+  width: 100%;
 }
 .start-part form button {
   align-self: center;
@@ -347,6 +387,7 @@ form input[type=file] {
   padding: 50px;
   text-align: center;
   border: none;
+  border-radius: 0.3rem;
   box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.164);
   font-size: 1.2rem;
   color: #fff;
@@ -398,7 +439,8 @@ form input[type=file] {
 
 /* Screens */
 .title {
-  font-size: 5rem;
+  font-size: 4rem;
+  text-transform: uppercase;
   color: #024474;
 }
 
@@ -447,19 +489,22 @@ form input[type=file] {
   flex-direction: column;
   width: 100%;
   gap: 40px;
+  border-top: 1px solid #024474;
+  padding-top: 0.5rem;
 }
 .matches > div {
   display: flex;
+  height: 100%;
   flex-direction: column;
-  gap: 2rem;
+  justify-content: space-between;
 }
 .matches > div > * {
   width: 100%;
 }
 .matches > div img {
   aspect-ratio: 1;
-  width: 70%;
-  margin: auto;
+  width: 65%;
+  margin: 0 auto;
 }
 .matches > div span {
   font-size: 1.8rem;
@@ -485,6 +530,7 @@ form input[type=file] {
   .matches {
     flex-direction: row;
     align-items: flex-start;
+    height: 630px;
   }
   .matches > * {
     flex: 1;
@@ -494,4 +540,9 @@ form input[type=file] {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  margin-top: 2rem;
+}
+.watch .title-sm {
+  color: #024474;
+  text-transform: uppercase;
 }

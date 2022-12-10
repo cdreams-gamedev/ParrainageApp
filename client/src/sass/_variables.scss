@@ -11,11 +11,16 @@ $black-900: rgb(28, 28, 28);
 $black-800: rgb(59, 59, 59);
 $black-700: rgb(85, 85, 85);
 
+//Background
+$bg-triangle:  url(http://localhost:3000/static/media/triangle.46598ab9f5404ba132e8.png);
+
 // Sizes
 $sm: 1.2rem;
 $md: 1.5rem;
 $lg: 1.8rem;
 $xl: 2.3rem;
+
+$full: 100%;
 
 // Transitions
 $base-transition: all ease .4s;

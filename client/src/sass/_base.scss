@@ -1,46 +1,59 @@
 /* Titles */
-*{
+* {
   scroll-behavior: smooth;
 }
 
-h1{
+h1 {
   font-weight: 900;
   font-size: $lg;
   margin: $lg 0;
 
-  @include lg{
+  @include lg {
     font-size: $xl;
     margin: $xl 0;
   }
 }
-h2{
+
+h2 {
   font-weight: 700;
-  font-size: $md;
   margin: $sm 0;
+  width: 100%;
+  color: $primary-blue;
+  text-align: center;
+  font-size: 2.5rem;
 }
 
 /* Buttons */
-.btn{
+.btn {
   border: none;
+  border-radius: .3rem;
   font-weight: 900;
+  font-size: 1.2rem;
+  text-transform: uppercase;
   padding: $sm $md;
+  margin-top: $md;
   cursor: pointer;
 
-  &.btn-primary{
+  &.btn-primary {
     background-color: $primary-blue;
     color: $white;
     transition: $base-transition;
 
-    &:hover{
-      background-color: $secondary-blue;
+    &:hover {
       transition: $base-transition;
+      background: $bg-triangle;
+      background-color: $secondary-blue;
+      background-repeat: no-repeat;
+      transition: $base-transition;
+      background-size: $lg;
+      background-position: bottom right;
     }
 
-    &:active{
+    &:active {
       background-color: $primary-blue;
     }
 
-    &:disabled{
+    &:disabled {
       background-color: $black-700;
       cursor: not-allowed;
     }
@@ -48,12 +61,12 @@ h2{
 }
 
 /* Inputs */
-input:disabled{
+input:disabled {
   cursor: not-allowed;
 }
 
 /* Views */
-.view{
+.view {
   transform: translateY(50px);
   min-height: calc(100vh - 50px);
   background-image: url(../assets/triangle.png);
@@ -62,16 +75,49 @@ input:disabled{
   background-repeat: no-repeat;
 }
 
-.container{
+/* Parrain - Filleul */
+.filleul-surligner,
+.parrain-surligner {
+  padding: 0 .5rem;
+  color: $white;
+}
+
+.filleul-surligner {
+  background-color: $primary-orange;
+}
+
+.parrain-surligner {
+  background-color: $primary-yellow;
+}
+
+.filleul {
+  h1 {
+    color: $primary-orange;
+    font-size: 2.5rem;
+    width: 100%;
+  }
+
+}
+
+.parrain {
+  h1 {
+    color: $primary-yellow;
+    font-size: 2.5rem;
+    width: 100%;
+  }
+
+}
+
+.container {
   max-width: 1200px;
   margin: auto;
 
 
-  @include sm{
+  @include sm {
     padding: .7rem;
   }
 
-  @include md{
+  @include md {
     padding: 1.3rem;
   }
 }

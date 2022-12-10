@@ -1,5 +1,6 @@
 .title {
-  font-size: 5rem;
+  font-size: 4rem;
+  text-transform: uppercase;
   color: $primary-blue;
 }
 
@@ -52,11 +53,14 @@
   flex-direction: column;
   width: 100%;
   gap: 40px;
+  border-top: 1px solid $primary-blue;
+  padding-top: .5rem;
 
   >div {
     display: flex;
+    height: 100%;
     flex-direction: column;
-    gap: 2rem;
+    justify-content: space-between;
 
     >* {
       width: 100%;
@@ -65,8 +69,8 @@
     img {
       aspect-ratio: 1;
       // min-width: 300px;
-      width: 70%;
-      margin: auto;
+      width: 65%;
+      margin: 0 auto;
     }
 
     span {
@@ -97,6 +101,7 @@
   .matches {
     flex-direction: row;
     align-items: flex-start;
+    height: 630px;
 
     >* {
       flex: 1;

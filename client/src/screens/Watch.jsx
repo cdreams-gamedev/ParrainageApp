@@ -26,7 +26,7 @@ const Watch = () => {
       <div className="view">
         <div className="container">
           <div className="watch">
-            <h1>Watch</h1>
+            <h1 className="title-sm center">Afficher les correspondances <span className="filleul-surligner bold">Filleul</span> - <span className="parrain-surligner bold">Parrain</span></h1>
             <form>
               <InputFile
                 name="jsonFile" 
@@ -36,7 +36,7 @@ const Watch = () => {
                 accept=".json"
                 onChange={ chooseFile }/>
             </form>
-            { matches && <Matches matches={ matches } /> }
+            { matches && <Matches watching={true} matches={ matches } /> }
           </div>
         </div>
       </div>

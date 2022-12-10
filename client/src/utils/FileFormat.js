@@ -4,18 +4,19 @@ const removeKey = (jsonString) => {
 }
 
 export const WriteToCSV = async (content, filename, contentType) => {
+  const date = Date().replace(/GMT-.*\)/g, "").replaceAll(" ","_")
+
   const a = document.createElement('a');
   let file = new Blob([content], { type: contentType });
 
   // Download the plain json
   a.href = URL.createObjectURL(file);
-  a.download = `${filename}_${Date.now()}.json`;
+  a.download = `${filename}_${date}.json`;
   a.click();
   URL.revokeObjectURL(a.href);
 
   // Convert to csv
   const items = JSON.parse(content)
-  console.log(items)
 
   const replacer = function (key, value) { return value === null ? '' : value }
 
@@ -47,8 +48,6 @@ export const WriteToCSV = async (content, filename, contentType) => {
       row => header.map(fieldName => {
         console.log()
         let fieldValue = JSON.stringify(row[fieldName], replacer);
-        console.log(fieldValue)
-
 
         let formattedValue = fieldValue
         formattedValue = formattedValue.replaceAll('{"level":', "")
@@ -58,9 +57,7 @@ export const WriteToCSV = async (content, filename, contentType) => {
         
         formattedValue = removeKey(formattedValue)
         formattedValue.replaceAll(":", "")
-        
-        console.log(formattedValue)
-
+      
         return formattedValue 
       }
       ).join(',')
@@ -68,10 +65,12 @@ export const WriteToCSV = async (content, filename, contentType) => {
 
   ].join('\r\n')
 
+  console.log(`csv : ${csv}`)
+
   // Download the csv
-  file = new Blob([csv]);
+  file = new Blob([csv],{type:"text/csv;charset=utf-8"});
   a.href = URL.createObjectURL(file)
-  a.download = `${filename}_${Date.now()}.csv`
+  a.download = `${filename}_${date}.csv`
   a.click();
   URL.revokeObjectURL(a.href);
 }

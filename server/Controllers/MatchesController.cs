@@ -5,6 +5,7 @@ using server.DTO;
 using server.Model;
 using server.Utilities;
 using System.Diagnostics;
+using System.Text;
 
 namespace server.Controllers
 {
@@ -16,7 +17,7 @@ namespace server.Controllers
         public ActionResult<IEnumerable<MatchDTO>> Matches([FromBody] ParamsDTO param)
         {
             //Random Generator
-            var random = new Random();
+            var random = new Random(2022); // seed = 2022
 
             //Array of matches
             List<MatchDTO> matches = new();
@@ -24,12 +25,13 @@ namespace server.Controllers
             var configCSV = new CsvConfiguration(System.Globalization.CultureInfo.InvariantCulture)
             {
                 HasHeaderRecord = true,
+                Encoding = Encoding.UTF8,
             };
 
             try
             {
-                using var readerFileul = new StreamReader(Path.Combine(Constants.AbsoluteBasePath, @param.FileulFilePath));
-                using var readerParrain = new StreamReader(Path.Combine(Constants.AbsoluteBasePath, @param.ParrainFilePath));
+                using var readerFileul = new StreamReader(Path.Combine(Constants.AbsoluteBasePath, @param.FileulFilePath), Encoding.UTF8, true);
+                using var readerParrain = new StreamReader(Path.Combine(Constants.AbsoluteBasePath, @param.ParrainFilePath), Encoding.UTF8, true);
                 using var csvFileul = new CsvReader(readerFileul, configCSV);
                 using var csvParrain = new CsvReader(readerParrain, configCSV);
 
@@ -40,11 +42,20 @@ namespace server.Controllers
                 var parrains = csvParrain.GetRecords<Student>().ToArray();
                 var key = 0;
 
+                List<Student> fileulParrain;
+
+
                 while (fileuls.Count > 0)
+                {
+
                     foreach (var parrain in parrains)
                     {
+
+                        if (fileuls.Count <= 0)
+                            break;
+
                         int randIndex = random.Next(0, fileuls.Count);
-                        List<Student> fileulParrain = new() { parrain, fileuls[randIndex] };
+                        fileulParrain = new() { parrain, fileuls[randIndex] };
                         fileuls.Remove(fileuls[randIndex]);
 
                         var match = new MatchDTO
@@ -55,6 +66,8 @@ namespace server.Controllers
                         matches.Add(match);
                         key++;
                     }
+                }
+                    
             }
             catch (Exception ex)
             {
